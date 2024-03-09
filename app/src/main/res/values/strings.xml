@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Festiwal</string>
+    <string name="screening_movies">Wyświetlane filmy</string>
+    <string name="icon_back">Icon Back</string>
+    <string name="notes">Notatki</string>
+    <string name="out_of">%s/%s</string>
+    <string name="festival_date">17 – 24 listopada</string>
+    <string name="festival_name">Wroclaw Film Festival</string>
+    <string name="incoming_screenings">Nadchodzące pokazy</string>
+    <string name="your_ratings">Twoje oceny</string>
+    <string name="categories">Kategorie</string>
+    <string name="date">Data</string>
+    <string name="find_movie">Znajdź film</string>
+    <string name="movie_details">Szczegóły filmu</string>
+    <string name="place">Miejsce</string>
+    <string name="director">Reżyseria</string>
+    <string name="screenwriter">Scenariusz</string>
+    <string name="genre">Gatunek</string>
+    <string name="production">Produkcja</string>
+    <string name="description">Opis</string>
+    <string name="rate_movie">Oceń film</string>
+    <string name="acting">Gra aktorska</string>
+    <string name="music">Muzyka</string>
+    <string name="pictures">Zdjęcia</string>
+    <string name="scenography">Scenografia</string>
+    <string name="directors">Reżyseria</string>
+    <string name="costumes">Kostiumy</string>
+    <string name="screenwriting">Scenariusz</string>
+    <string name="title">Tytuł</string>
+    <string name="rating">Ocena</string>
+    <string name="error">Błąd</string>
+    <string name="no_ratings_msg">Nie oceniłeś jeszcze żadnego filmu</string>
+</resources>
