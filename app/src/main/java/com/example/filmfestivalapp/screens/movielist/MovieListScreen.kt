@@ -194,8 +194,7 @@ fun MovieListScreenContent(
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = Dimensions.space18),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(top = Dimensions.space18)
                 ) {
                     for (category in state.chosenCategories) {
                         Surface(
