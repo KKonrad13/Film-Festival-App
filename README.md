@@ -11,7 +11,7 @@
 
 ## Introduction <a name="introduction"></a>
 
-**Film Festival App** is a native Android app for a film festival participant with data about all screenings. User can access details of every movie, rate them and leave note for oneself.
+**Film Festival App** is a native Android app for a film festival participant with data about all screenings. A user can access details of every movie, rate them, and leave a note for oneself.
 
 ## Features <a name="features"></a>
 
@@ -21,22 +21,22 @@ Home screen with navigation to social media as well as Movie List and Rated Movi
 <img src="https://imgur.com/6StdZmN.png" alt="Home Imgur Image" width="25%">
 
 - **Movie List**
-Screen that contains every screening during film festival.
+The screen that contains every screening during a film festival.
 
 <img src="https://imgur.com/7eWZfxl.png" alt="Movie List Imgur Image" width="25%">
 
 - **Movie Details**
-Screen that contains details about given movie.
+The screen that contains details about the given movie.
 
 <img src="https://imgur.com/lvM6h2D.png" alt="Movie Details Imgur Image" width="25%">
 
 - **Rate Movie**
-Screen used for rating chosen movie.
+The screen used for rating the chosen movie.
 
 <img src="https://imgur.com/h36xCnu.png" alt="Rate Movie Imgur Image" width="25%">
 
 - **Rated Movies List**
-Screen that contains list of already rated movies.
+The screen that contains a list of already-rated movies.
 
 <img src="https://imgur.com/fEpAyTZ.png" alt="Rate Movie Imgur Image" width="25%">
 
