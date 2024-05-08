@@ -13,6 +13,7 @@ import com.example.filmfestivalapp.screens.moviedetails.MovieDetailsScreen
 import com.example.filmfestivalapp.screens.movielist.MovieListScreen
 import com.example.filmfestivalapp.screens.ratemovie.RateMovieScreen
 import com.example.filmfestivalapp.screens.ratinglist.RatingListScreen
+import com.example.filmfestivalapp.screens.video.VideoScreen
 
 @Composable
 fun AppNavHost(
@@ -29,7 +30,8 @@ fun AppNavHost(
                 onBackClick = navController::popBackStack,
                 onMovieClick = { movieId -> navController.navigate("${Screens.MOVIE_DETAILS.name}/{$movieId}") },
                 onMovieListClick = { navController.navigate(Screens.MOVIE_LIST.name) },
-                onRatingListClick = { navController.navigate(Screens.RATING_LIST.name) }
+                onRatingListClick = { navController.navigate(Screens.RATING_LIST.name) },
+                onPromoMovieClick = { navController.navigate(Screens.PROMO_VIDEO.name) },
             )
         }
         composable(
@@ -39,7 +41,7 @@ fun AppNavHost(
             MovieDetailsScreen(
                 onBackClick = navController::popBackStack,
                 onStarsClick = { movieId -> navController.navigate("${Screens.RATE_MOVIE.name}/{$movieId}") },
-                movieId = it.arguments?.getString("movieId")?.replace("[{}]".toRegex(),"")
+                movieId = it.arguments?.getString("movieId")?.replace("[{}]".toRegex(), "")
             )
         }
         composable(route = Screens.MOVIE_LIST.name) {
@@ -54,7 +56,7 @@ fun AppNavHost(
         ) {
             RateMovieScreen(
                 onBackClick = { navController.popBackStack() },
-                movieId = it.arguments?.getString("movieId")?.replace("[{}]".toRegex(),"")
+                movieId = it.arguments?.getString("movieId")?.replace("[{}]".toRegex(), "")
             )
         }
         composable(route = Screens.RATING_LIST.name) {
@@ -62,6 +64,9 @@ fun AppNavHost(
                 onBackClick = navController::popBackStack,
                 onMovieClick = { movieId -> navController.navigate("${Screens.MOVIE_DETAILS.name}/{$movieId}") }
             )
+        }
+        composable(route = Screens.PROMO_VIDEO.name) {
+            VideoScreen(onBackClick = navController::popBackStack)
         }
     }
 }

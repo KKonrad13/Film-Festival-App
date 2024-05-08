@@ -12,6 +12,7 @@ interface HomeUiInteraction {
     fun onMovieClick(movieId: String)
     fun onMovieListClick()
     fun onRatingListClick()
+    fun onPromoMovieClick()
 
     companion object {
         fun default(
@@ -22,6 +23,7 @@ interface HomeUiInteraction {
             onMovieClick: OnClick1<String> = {},
             onMovieListClick: Navigation = {},
             onRatingListClick: Navigation = {},
+            onPromoMovieClick: Navigation = {}
         ) = object : HomeUiInteraction {
             override fun onBackClick() {
                 onBackClick()
@@ -51,6 +53,9 @@ interface HomeUiInteraction {
                 onRatingListClick()
             }
 
+            override fun onPromoMovieClick() {
+                onPromoMovieClick()
+            }
 
         }
     }

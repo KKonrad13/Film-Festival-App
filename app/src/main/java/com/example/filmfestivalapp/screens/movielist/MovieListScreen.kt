@@ -1,5 +1,6 @@
 package com.example.filmfestivalapp.screens.movielist
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -194,6 +195,7 @@ fun MovieListScreenContent(
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .animateContentSize()
                         .padding(top = Dimensions.space18)
                 ) {
                     for (category in state.chosenCategories) {

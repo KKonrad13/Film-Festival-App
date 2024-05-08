@@ -1,6 +1,8 @@
 package com.example.filmfestivalapp.screens.home
 
+import android.media.MediaPlayer
 import androidx.annotation.DrawableRes
+import androidx.annotation.RawRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -21,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,6 +35,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.filmfestivalapp.Navigation
 import com.example.filmfestivalapp.Navigation1
 import com.example.filmfestivalapp.OnClick
@@ -48,6 +56,7 @@ fun HomeScreen(
     onMovieClick: Navigation1<String>,
     onMovieListClick: Navigation,
     onRatingListClick: Navigation,
+    onPromoMovieClick: Navigation,
 ) {
     val viewModel = getViewModel<HomeViewModel>()
     val uiInteraction = HomeUiInteraction.default(
@@ -57,36 +66,43 @@ fun HomeScreen(
         onYoutubeClick = viewModel::onYoutubeClick,
         onMovieClick = onMovieClick,
         onMovieListClick = onMovieListClick,
-        onRatingListClick = onRatingListClick
+        onRatingListClick = onRatingListClick,
+        onPromoMovieClick = onPromoMovieClick
     )
     val uiState by viewModel.state.collectAsState()
     val context = LocalContext.current
     viewModel.CollectIntent(context = context)
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         viewModel.updateMovies()
     }
     HomeScreenContent(state = uiState, uiInteraction = uiInteraction)
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenContent(
     state: HomeState,
     uiInteraction: HomeUiInteraction,
 ) {
+    val context = LocalContext.current
+    val mediaPlayer: MediaPlayer = MediaPlayer.create(context, R.raw.background_music)
+    LaunchedEffect(key1 = Unit){
+        mediaPlayer.start()
+    }
+    DisposableEffect(key1 = Unit){
+        onDispose {
+            mediaPlayer.pause()
+        }
+    }
     Column(
         modifier = Modifier
             .padding(Dimensions.space18)
             .verticalScroll(rememberScrollState())
     ) {
-        AsyncImage(
-            model = "https://doba.pl/media/powiaty/wroclaw/articles/images/48462/doba_pl_225191-e6a87bfff4ef5b46c06f80dd4a2fd4d3_1280x720_onlyx.jpg",
-            contentDescription = null,
-            placeholder = painterResource(id = R.drawable.icon_downloading),
-            error = painterResource(id = R.drawable.icon_error),
+        Animation(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.secondary)
+                .clickableNoIndication { mediaPlayer.pause() },
+            animationId = R.raw.movie_animation
         )
         Text(
             text = stringResource(id = R.string.festival_date),
@@ -125,7 +141,7 @@ fun HomeScreenContent(
                 tint = MaterialTheme.colorScheme.primary
             )
         }
-        if (state.incomingMovies.isNotEmpty()){
+        if (state.incomingMovies.isNotEmpty()) {
             Text(
                 text = stringResource(id = R.string.incoming_screenings) + ":",
                 style = MaterialTheme.typography.titleLarge,
@@ -174,8 +190,34 @@ fun HomeScreenContent(
             text = stringResource(id = R.string.your_ratings),
             onClick = uiInteraction::onRatingListClick
         )
-
+        NavigationButton(
+            icon = R.drawable.icon_movie,
+            text = stringResource(id = R.string.promo_movie),
+            onClick = uiInteraction::onPromoMovieClick
+        )
     }
+}
+
+@Composable
+fun Animation(
+    modifier: Modifier = Modifier,
+    @RawRes animationId: Int,
+) {
+    val preloaderLottieComposition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(animationId)
+    )
+
+    val preloaderProgress by animateLottieCompositionAsState(
+        preloaderLottieComposition,
+        iterations = LottieConstants.IterateForever,
+        isPlaying = true
+    )
+
+    LottieAnimation(
+        composition = preloaderLottieComposition,
+        progress = { preloaderProgress },
+        modifier = modifier
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -218,6 +260,6 @@ fun NavigationButton(
 @Composable
 fun HomeScreenPreview() {
     FilmFestivalAppTheme {
-        HomeScreen({}, {}, {}, {})
+        HomeScreen({}, {}, {}, {}, {})
     }
 }
